@@ -1,9 +1,10 @@
 ﻿using System.Management;
 
-var osSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
+var usbSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE DeviceID LIKE 'USB%'");
 
-foreach (ManagementObject os in osSearcher.Get())
+
+Console.WriteLine($"Устройства Pug and Play с идентификатором USB:");
+foreach (ManagementObject device in usbSearcher.Get())
 {
-    Console.WriteLine($"OC: {os["Caption"]}");
-    Console.WriteLine($"Версия {os["Version"]}");
+    Console.WriteLine($"  - {device["Name"]}");
 }
